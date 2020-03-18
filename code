@@ -1,0 +1,228 @@
+from tkinter import *
+import random
+from tkinter import messagebox
+
+# Creating the window, window title, and icon
+root = Tk()
+root.title('Coin Flip!')
+root.tk.call('wm', 'iconphoto', root._w, PhotoImage(file='C:/Users/User/PycharmProjects/Coin Flip/flip.png'))
+
+# Creating frames for organization
+play_frame = LabelFrame(root, padx=50, pady=50)
+play_frame.pack(padx=50, pady=50, side='top')
+
+result_frame = LabelFrame(root, padx=50, pady=50)
+result_frame.pack(padx=50, pady=50, side='bottom')
+
+# Initial Startup (Labels and Buttons)
+question = Label(play_frame, text='Heads or Tails?', font=('Courier', 17), width=40).pack()
+heads_button = Button(play_frame, text='Heads!', padx=40, pady=20, font=('Courier', 12), command=lambda: heads()).pack(
+    side='left')
+tails_button = Button(play_frame, text='Tails!', padx=40, pady=20, font=('Courier', 12), command=lambda: tails()).pack(
+    side='right')
+counter_button = Button(result_frame, text='Click me to see history!', padx=20, pady=10, font=('Courier', 10),
+                        command=lambda: counter()).pack(
+    side='right')
+quit_button = Button(result_frame, text='Quit Game', padx=20, pady=10, font=('Courier', 10), command=root.quit).pack(
+    side='left')
+dice_button = Button(root, text='Click on me to play with Dice!', font=('Courier', 10), command=lambda: dice()).pack()
+heading = Label(result_frame, text='Result:', font=('Courier', 17), width=40).pack(side='top')
+
+# Variables for Keeping History of Guesses
+correct = 0
+incorrect = 0
+total = 0
+
+
+# Functions
+# When 'Heads!' button is pressed, the guess is Heads
+
+def heads():
+    global correct, total, incorrect
+    result = random.randint(1, 2)
+    # If guess is Heads and result is Heads
+    if result == 1:
+        head_label = Label(result_frame, text='You guessed Heads and the coin lands on Heads! Congratulations!',
+                           font=('Courier', 10)).pack(side='bottom')
+        correct += 1
+        total += 1
+    # If guess is Heads and result is Tails
+    elif result == 2:
+        tail_label = Label(result_frame, text='You guessed Heads and the coin lands on Tails! Better luck next time!',
+                           font=('Courier', 10)).pack(side='bottom')
+        incorrect += 1
+        total += 1
+
+
+# When 'Tails!' button is pressed, the guess is Tails
+def tails():
+    global correct, incorrect, total
+    result = random.randint(1, 2)
+    # If guess is Tails and result is Heads
+    if result == 1:
+        head_label = Label(result_frame, text='You guessed Tails and the coin lands on Heads! Better luck next time!',
+                           font=('Courier', 10)).pack(side='bottom')
+        incorrect += 1
+        total += 1
+
+    # If guess is Tails and result is Tails
+    elif result == 2:
+        tail_label = Label(result_frame, text='You guessed Tails and the coin lands on Tails! Congratulations!',
+                           font=('Courier', 10)).pack(side='bottom')
+        correct += 1
+        total += 1
+
+
+#  Creates message box that has history of game play
+def counter():
+    text = 'Correct Guesses: ' + str(correct) + ' \nIncorrect Guesses: ' + str(incorrect) + ' \nTotal Guesses: ' + str(
+        total)
+    messagebox.showinfo('History of Gameplay', text)
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Variables to keep track of history
+# Everything is the same as above, functions are just repeated several times
+correct_2 = 0
+incorrect_2 = 0
+total_2 = 0
+
+
+# Open dice game
+def dice():
+    # Creates window, window title, and icon
+    top = Toplevel()
+    top.title('Dice Game')
+    top.tk.call('wm', 'iconphoto', top._w, PhotoImage(file='C:/Users/User/PycharmProjects/Coin Flip/dice.png'))
+
+    # Creates frames for organization
+    play_frame_2 = LabelFrame(top, padx=50, pady=50)
+    play_frame_2.pack(padx=50, pady=50, side='top')
+
+    result_frame_2 = LabelFrame(top, padx=50, pady=50)
+    result_frame_2.pack(padx=50, pady=50, side='bottom')
+
+    # Initial Startup (Labels and Buttons)
+    question_2 = Label(play_frame_2, text='Pick a number from 1 to 6!', font=('Courier', 17), width=40, height=5).pack()
+
+    button_1 = Button(play_frame_2, text='1', padx=40, pady=20, font=('Courier', 12),
+                      command=lambda: function_1()).pack(side='left')
+    button_2 = Button(play_frame_2, text='2', padx=40, pady=20, font=('Courier', 12),
+                      command=lambda: function_2()).pack(side='left')
+    button_3 = Button(play_frame_2, text='3', padx=40, pady=20, font=('Courier', 12),
+                      command=lambda: function_3()).pack(side='left')
+    button_4 = Button(play_frame_2, text='4', padx=40, pady=20, font=('Courier', 12),
+                      command=lambda: function_4()).pack(side='left')
+    button_5 = Button(play_frame_2, text='5', padx=40, pady=20, font=('Courier', 12),
+                      command=lambda: function_5()).pack(side='left')
+    button_6 = Button(play_frame_2, text='6', padx=40, pady=20, font=('Courier', 12),
+                      command=lambda: function_6()).pack(side='left')
+
+    counter_button_2 = Button(result_frame_2, text='Click me to see history!', padx=20, pady=10, font=('Courier', 10),
+                              command=lambda: counter_2()).pack(side='right')
+    quit_button_2 = Button(result_frame_2, text='Quit Game', padx=20, pady=10, font=('Courier', 10),
+                           command=top.quit).pack(side='left')
+
+    heading_2 = Label(result_frame_2, text='Result:', font=('Courier', 17), width=40).pack(side='top')
+
+    # Functions
+    def function_1():
+        global correct_2, incorrect_2, total_2
+        result_2 = random.randint(1, 6)
+        if result_2 == 1:
+            label_1 = Label(result_frame_2, text='You guessed 1 and the dice lands on 1! Congratulations!',
+                            font=('Courier', 10)).pack(side='bottom')
+            correct_2 += 1
+            total_2 += 1
+        else:
+            string = 'You guessed 1 and the dice lands on ' + str(result_2) + '! Better luck next time!'
+            failed_label = Label(result_frame_2, text=string,
+                                 font=('Courier', 10)).pack(side='bottom')
+            incorrect_2 += 1
+            total_2 += 1
+
+    def function_2():
+        global correct_2, incorrect_2, total_2
+        result_2 = random.randint(1, 6)
+        if result_2 == 2:
+            label_1 = Label(result_frame_2, text='You guessed 2 and the dice lands on 2! Congratulations!',
+                            font=('Courier', 10)).pack(side='bottom')
+            correct_2 += 1
+            total_2 += 1
+        else:
+            string = 'You guessed 2 and the dice lands on ' + str(result_2) + '! Better luck next time!'
+            failed_label = Label(result_frame_2, text=string,
+                                 font=('Courier', 10)).pack(side='bottom')
+            incorrect_2 += 1
+            total_2 += 1
+
+    def function_3():
+        global correct_2, incorrect_2, total_2
+        result_2 = random.randint(1, 6)
+        if result_2 == 3:
+            label_1 = Label(result_frame_2, text='You guessed 3 and the dice lands on 3! Congratulations!',
+                            font=('Courier', 10)).pack(side='bottom')
+            correct_2 += 1
+            total_2 += 1
+        else:
+            string = 'You guessed 3 and the dice lands on ' + str(result_2) + '! Better luck next time!'
+            failed_label = Label(result_frame_2, text=string,
+                                 font=('Courier', 10)).pack(side='bottom')
+            incorrect_2 += 1
+            total_2 += 1
+
+    def function_4():
+        global correct_2, incorrect_2, total_2
+        result_2 = random.randint(1, 6)
+        if result_2 == 4:
+            label_1 = Label(result_frame_2, text='You guessed 4 and the dice lands on 4! Congratulations!',
+                            font=('Courier', 10)).pack(side='bottom')
+            correct_2 += 1
+            total_2 += 1
+        else:
+            string = 'You guessed 4 and the dice lands on ' + str(result_2) + '! Better luck next time!'
+            failed_label = Label(result_frame_2, text=string,
+                                 font=('Courier', 10)).pack(side='bottom')
+            incorrect_2 += 1
+            total_2 += 1
+
+    def function_5():
+        global correct_2, incorrect_2, total_2
+        result_2 = random.randint(1, 6)
+        if result_2 == 5:
+            label_1 = Label(result_frame_2, text='You guessed 5 and the dice lands on 5! Congratulations!',
+                            font=('Courier', 10)).pack(side='bottom')
+            correct_2 += 1
+            total_2 += 1
+        else:
+            string = 'You guessed 5 and the dice lands on ' + str(result_2) + '! Better luck next time!'
+            failed_label = Label(result_frame_2, text=string,
+                                 font=('Courier', 10)).pack(side='bottom')
+            incorrect_2 += 1
+            total_2 += 1
+
+    def function_6():
+        global correct_2, incorrect_2, total_2
+        result_2 = random.randint(1, 6)
+        if result_2 == 6:
+            label_1 = Label(result_frame_2, text='You guessed 6 and the dice lands on 6! Congratulations!',
+                            font=('Courier', 10)).pack(side='bottom')
+            correct_2 += 1
+            total_2 += 1
+        else:
+            string = 'You guessed 6 and the dice lands on ' + str(result_2) + '! Better luck next time!'
+            failed_label = Label(result_frame_2, text=string,
+                                 font=('Courier', 10)).pack(side='bottom')
+            incorrect_2 += 1
+            total_2 += 1
+
+    def counter_2():
+        text_2 = 'Correct Guesses: ' + str(correct_2) + ' \nIncorrect Guesses: ' + str(
+            incorrect_2) + ' \nTotal Guesses: ' + str(
+            total_2)
+        messagebox.showinfo('History of Gameplay', text_2)
+
+
+# Keeps the window continuously running until exit button is pressed
+root.mainloop()
